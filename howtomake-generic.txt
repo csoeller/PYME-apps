@@ -1,0 +1,21 @@
+how to make urlopener.app from Makefile:
+
+1) generate applescript as text
+2) make app from applescript file, e.g.
+   /usr/bin/osacompile -o /path/to/applicationbundle.app /path/to/textfile.txt
+3) edit Info.plist to contain the URL handling text:
++	<key>CFBundleIdentifier</key>
++	<string>com.pyme.AppleScript.pyme</string>
++	<key>CFBundleURLTypes</key>
++	<array>
++	  <dict>
++	    <key>CFBundleURLName</key>
++	    <string>Pyme</string>
++	    <key>CFBundleURLSchemes</key>
++	    <array>
++	      <string>pyme</string>
++	    </array>
++	  </dict>
++	</array>
+
+That should be it...
