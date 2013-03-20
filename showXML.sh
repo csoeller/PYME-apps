@@ -2,6 +2,10 @@
 PATH="/Library/Frameworks/Python.framework/Versions/Current/bin:${PATH}"
 # echo $PATH
 # echo $PYTHONPATH
-PYTHONPATH=$HOME/Documents/src/PYMEcurrent/:/Users/csoelle/Documents/src/PYME-nf/ python $HOME/Documents/src/PYMEapps/showXML.py $*
+FNAME=$1
+PYTHONPATH=/Users/csoelle/Documents/src/PYME-nf/ python - <<EOF
+from PYME.Acquire import MetaDataHandler
+print MetaDataHandler.XMLMDHandler("$FNAME")
+EOF
 #echo 'Arguments'
 #echo $*
