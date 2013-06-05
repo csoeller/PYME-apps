@@ -1,5 +1,7 @@
 PLATYPUS='/usr/local/bin/platypus'
 PLATICNS='/Applications/Platypus.app/Contents/Resources/PlatypusDefault.icns'
+APPDIR='/Applications'
+PDIR='PYMEapps'
 
 all: VisGui.app	dh5view.app PYMEurlOpener.app showXML.app
 
@@ -16,3 +18,15 @@ PYMEurlOpener.app: PYMEurlOpener.applescript pyme-urlopen.sh editplist_for_url.p
 
 showXML.app: showXML.sh
 	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'showXML' -o 'Text Window' -p '/bin/bash' -X '*' -T '****|fold'  -y 'showXML.sh'
+
+install: all
+	if [ -e $(APPDIR)/$(PDIR).old ] ; \
+	then \
+		trash -v $(APPDIR)/$(PDIR).old ;\
+	fi
+	if [ -e $(APPDIR)/$(PDIR) ] ; \
+	then \
+		mv $(APPDIR)/$(PDIR) $(APPDIR)/$(PDIR).old ;\
+	fi
+	mkdir $(APPDIR)/$(PDIR)
+	rsync -av VisGui.app dh5view.app PYMEurlOpener.app showXML.app $(APPDIR)/$(PDIR)
