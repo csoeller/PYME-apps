@@ -1,9 +1,11 @@
 #!/bin/bash
-PATH="/Library/Frameworks/Python.framework/Versions/Current/bin:${PATH}"
+PATH="${HOME}/anaconda/bin:${PATH}"
+
 # echo $PATH
 # echo $PYTHONPATH
 export PYMEZYLAMAPDIR=/Users/csoe002/Documents/data/LM/Zyla/maps/blemishcurrent
-PYTHONPATH=$HOME/Documents/src/PYMEcurrent/:$HOME/Documents/src/PYME-nf/ dh5view.py "$*"
-    
-#echo 'Arguments'
-#echo $*
+export PYTHONPATH=$HOME/Documents/src/PYME-nf/
+echo "Opening $1..."
+
+# This may need tweaking to something more like 
+(nohup dh5view.py "$*" >"/tmp/dh5view-$BASHPID.tmp" 2>&1 &)
