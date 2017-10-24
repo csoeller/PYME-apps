@@ -7,7 +7,7 @@ FNAME=$1
 # export PYTHONPATH=/Users/csoelle/Documents/src/PYME-nf/
 python - <<EOF
 import time
-from PYME.Acquire import MetaDataHandler
+from PYME.IO import MetaDataHandler
 mdh =  MetaDataHandler.XMLMDHandler("$FNAME")
 print mdh
 try:
