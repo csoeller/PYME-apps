@@ -3,7 +3,7 @@ PLATICNS='/Applications/Platypus.app/Contents/Resources/PlatypusDefault.icns'
 APPDIR='/Applications'
 PDIR='PYMEapps'
 
-all: VisGui.app	dh5view.app showXML.app VisGuiDef.app launchWorkers.app killLaunchWorkers.app dh5viewDef.app
+all: VisGui.app	dh5view.app showXML.app VisGuiDef.app launchWorkers.app killLaunchWorkers.app dh5viewDef.app notebookServer.app
 
 VisGui.app: visgui.sh
 	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'VisGui' -o 'Progress Bar' -p '/opt/local/bin/bash' -X '*|h5r' -y 'visgui.sh'
@@ -30,6 +30,9 @@ launchWorkers.app: launchWorkers.sh
 
 killLaunchWorkers.app: killLaunchWorkers.sh
 	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'killLaunchWorkers' -o 'Text Window' -p '/bin/bash' -y 'killlaunchWorkers.sh'
+
+notebookServer.app: notebookserver.sh
+	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'notebookServer' -o 'Text Window' -p '/bin/bash' -y 'notebookserver.sh'
 
 install: all
 	if [ -e $(APPDIR)/$(PDIR).old ] ; \
