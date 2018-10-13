@@ -4,7 +4,7 @@ syntax: glob
 *.app
 *.scpt
 oldnotes
-aunchWorkers-pyme-default.sh
+launchWorkers-pyme-default.sh
 killLaunchWorkers-pyme-default.sh
 dh5view.sh
 visgui.sh
