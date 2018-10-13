@@ -1,5 +1,4 @@
 PLATYPUS='/usr/local/bin/platypus'
-PLATYPUSORI='/usr/local/bin/platypus.orig'
 PLATICNS='/Applications/Platypus.app/Contents/Resources/PlatypusDefault.icns'
 APPDIR='/Applications'
 PDIR='PYMEapps'
@@ -18,13 +17,13 @@ killLaunchWorkers-pyme-default.app: killLaunchWorkers-pyme-default.sh
 	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'killLaunchWorkers-pyme-default' -o 'Text Window' -p '/bin/bash' -y 'killLaunchWorkers-pyme-default.sh'
 
 VisGui.app: visgui.sh
-	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'VisGui' -o 'Progress Bar' -p '/opt/local/bin/bash' -X '*|h5r' -y 'visgui.sh'
+	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-v.icns  -a 'VisGui' -o 'Progress Bar' -p '/opt/local/bin/bash' -X '*|h5r' -y 'visgui.sh'
 
 VisGuiDef.app: visgui-pyme-default.sh
 	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'VisGuiDef' -o 'Progress Bar' -p '/opt/local/bin/bash' -X '*|h5r' -y 'visgui-pyme-default.sh'
 
 dh5view.app: dh5view.sh
-	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'dh5view' -o 'Progress Bar' -p '/opt/local/bin/bash' -X '*|tif|lsm|h5|psf' -y 'dh5view.sh'
+	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-d.icns  -a 'dh5view' -o 'Progress Bar' -p '/opt/local/bin/bash' -X '*|tif|lsm|h5|psf' -y 'dh5view.sh'
 
 dh5viewDef.app: dh5view-pyme-default.sh
 	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'dh5viewDef' -o 'Progress Bar' -p '/opt/local/bin/bash' -X '*|tif|lsm|h5|psf' -y 'dh5view-pyme-default.sh'
