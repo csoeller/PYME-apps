@@ -1,13 +1,14 @@
 PLATYPUS='/usr/local/bin/platypus'
+PLATYPUSORI='/usr/local/bin/platypus.orig'
 PLATICNS='/Applications/Platypus.app/Contents/Resources/PlatypusDefault.icns'
 APPDIR='/Applications'
 PDIR='PYMEapps'
-SCRIPTPATH='${HOME}//anaconda/bin:${PATH}'
+SCRIPTPATH='$${HOME}/anaconda/bin:$${PATH}'
 LOCALICONS=icons
 
 all: VisGui.app	dh5view.app showXML.app VisGuiDef.app launchWorkers.app killLaunchWorkers.app dh5viewDef.app notebookServer.app launchnotebook.app
 
-launchWorkers-pyme-default.sh killLaunchWorkers-pyme-default.sh: gen_script.py
+launchWorkers-pyme-default.sh killLaunchWorkers-pyme-default.sh dh5view.sh visgui.sh dh5view-pyme-default.sh visgui-pyme-default.sh killLaunchWorkers.sh launchWorkers.sh: gen_script.py
 	python gen_script.py -p $(SCRIPTPATH) $@ > $@
 
 launchWorkers-pyme-default.app: launchWorkers-pyme-default.sh
