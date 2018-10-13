@@ -2,8 +2,19 @@ PLATYPUS='/usr/local/bin/platypus'
 PLATICNS='/Applications/Platypus.app/Contents/Resources/PlatypusDefault.icns'
 APPDIR='/Applications'
 PDIR='PYMEapps'
+SCRIPTPATH='${HOME}//anaconda/bin:${PATH}'
+LOCALICONS=icons
 
-all: VisGui.app	dh5view.app showXML.app VisGuiDef.app launchWorkers.app killLaunchWorkers.app dh5viewDef.app notebookServer.app
+all: VisGui.app	dh5view.app showXML.app VisGuiDef.app launchWorkers.app killLaunchWorkers.app dh5viewDef.app notebookServer.app launchnotebook.app
+
+launchWorkers-pyme-default.sh killLaunchWorkers-pyme-default.sh: gen_script.py
+	python gen_script.py -p $(SCRIPTPATH) $@ > $@
+
+launchWorkers-pyme-default.app: launchWorkers-pyme-default.sh
+	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'launchWorkers-pyme-default' -o 'Text Window' -p '/bin/bash' -y 'launchWorkers-pyme-default.sh'
+
+killLaunchWorkers-pyme-default.app: killLaunchWorkers-pyme-default.sh
+	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'killLaunchWorkers-pyme-default' -o 'Text Window' -p '/bin/bash' -y 'killLaunchWorkers-pyme-default.sh'
 
 VisGui.app: visgui.sh
 	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'VisGui' -o 'Progress Bar' -p '/opt/local/bin/bash' -X '*|h5r' -y 'visgui.sh'
@@ -31,8 +42,14 @@ launchWorkers.app: launchWorkers.sh
 killLaunchWorkers.app: killLaunchWorkers.sh
 	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'killLaunchWorkers' -o 'Text Window' -p '/bin/bash' -y 'killlaunchWorkers.sh'
 
+
+# utilities for iPython (no jupyter) notebooks
+
 notebookServer.app: notebookserver.sh
-	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'notebookServer' -o 'Text Window' -p '/bin/bash' -y 'notebookserver.sh'
+	$(PLATYPUS) -D  -i $(LOCALICONS)/ipython.icns  -a 'notebookServer' -o 'Text Window' -p '/bin/bash' -y 'notebookserver.sh'
+
+launchnotebook.app: launchnotebook.sh
+	$(PLATYPUS) -D  -i $(LOCALICONS)/ipython.icns -R -a 'launchnotebook'  -o 'Text Window'  -p '/bin/bash'  -T 'public.item|public.folder'  'launchnotebook.sh'
 
 install: all
 	if [ -e $(APPDIR)/$(PDIR).old ] ; \
