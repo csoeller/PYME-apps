@@ -1,11 +1,12 @@
 PLATYPUS='/usr/local/bin/platypus'
+PLATYPUSORI='/usr/local/bin/platypus.orig'
 PLATICNS='/Applications/Platypus.app/Contents/Resources/PlatypusDefault.icns'
 APPDIR='/Applications'
 PDIR='PYMEapps'
 SCRIPTPATH='$${HOME}/anaconda/bin:$${PATH}'
 LOCALICONS=icons
 
-all: VisGui.app	dh5view.app showXML.app VisGuiDef.app launchWorkers.app killLaunchWorkers.app dh5viewDef.app notebookServer.app launchnotebook.app
+all: VisGui.app	dh5view.app showXML.app VisGuiDef.app launchWorkers.app killLaunchWorkers.app dh5viewDef.app notebookServer.app launchnotebook.app launchWorkers-pyme-default.app killLaunchWorkers-pyme-default.app
 
 launchWorkers-pyme-default.sh killLaunchWorkers-pyme-default.sh dh5view.sh visgui.sh dh5view-pyme-default.sh visgui-pyme-default.sh killLaunchWorkers.sh launchWorkers.sh: gen_script.py
 	python gen_script.py -p $(SCRIPTPATH) $@ > $@
@@ -37,10 +38,10 @@ showXML.app: showXML.sh
 	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'showXML' -o 'Text Window' -p '/bin/bash' -X '*|xml'  -y 'showXML.sh'
 
 launchWorkers.app: launchWorkers.sh
-	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'launchWorkers' -o 'Text Window' -p '/bin/bash' -y 'launchWorkers.sh'
+	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-launcher.icns  -a 'launchWorkers' -o 'Text Window' -p '/bin/bash' -y 'launchWorkers.sh'
 
 killLaunchWorkers.app: killLaunchWorkers.sh
-	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'killLaunchWorkers' -o 'Text Window' -p '/bin/bash' -y 'killlaunchWorkers.sh'
+	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-launcher.icns  -a 'killLaunchWorkers' -o 'Text Window' -p '/bin/bash' -y 'killlaunchWorkers.sh'
 
 
 # utilities for iPython (no jupyter) notebooks

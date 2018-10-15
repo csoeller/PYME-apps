@@ -15,12 +15,40 @@ PATH="{path}"
 {appname} 2>&1
 """
 
+sh_template_simple_with_cleanup = """\
+#!{shebang}
+
+# we exploit that platypus apps send a SIGTERM when the 'Cancel' button is pressed
+exit_script() {{
+    echo "Cleaning up"
+    {cleanup_action}
+    trap - SIGINT SIGTERM # clear the trap
+}}
+
+trap exit_script SIGINT SIGTERM
+
+PATH="{path}"
+{pythonpath_line}
+{env_line}
+{appname} 2>&1
+echo
+echo "**************************************"
+echo "Press cancel to execute cleanup action: {cleanup_action}"
+echo "**************************************"
+echo
+
+# now we wait for a signal to call our exit action
+while true; do sleep 86400; done
+"""
+
 default = {'shebang' : '/bin/bash',
            'path' : '${HOME}/anaconda/bin:${PATH}',
            'pythonpath' : None,
            'env' : None,
            'appname': 'myapp',
-           'logprefix' : 'prefix'}
+           'logprefix' : 'prefix',
+           'cleanup_action' : None,
+           }
 
 def replace_or_default(**kwargs):
     ndict = default.copy()
@@ -44,7 +72,10 @@ def guiscript(**kwargs):
 
 def simplescript(**kwargs):
     ndict = replace_or_default(**kwargs)
-    script = sh_template_simple.format(**ndict)
+    if ndict['cleanup_action'] is not None:
+        script = sh_template_simple_with_cleanup.format(**ndict)
+    else:
+        script = sh_template_simple.format(**ndict)
     return script
 
 def genscripts():
@@ -54,9 +85,9 @@ def genscripts():
         'dh5view-pyme-default.sh' : guiscript(appname='dh5view',logprefix='dh5view',env='pyme-default'),
         'visgui-pyme-default.sh' : guiscript(appname='visgui',logprefix='visgui',env='pyme-default'),
         'killLaunchWorkers.sh' : simplescript(appname='launchworkers -k'),
-        'launchWorkers.sh' : simplescript(appname='launchworkers'),
+        'launchWorkers.sh' : simplescript(appname='launchworkers',cleanup_action='launchworkers -k'),
         'killLaunchWorkers-pyme-default.sh' : simplescript(appname='launchworkers -k',env='pyme-default'),
-        'launchWorkers-pyme-default.sh' : simplescript(appname='launchworkers',env='pyme-default'),
+        'launchWorkers-pyme-default.sh' : simplescript(appname='launchworkers',env='pyme-default',cleanup_action='launchworkers -k'),
     }
 
     return scripts

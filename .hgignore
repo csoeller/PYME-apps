@@ -12,3 +12,4 @@ dh5view-pyme-default.sh
 visgui-pyme-default.sh
 killLaunchWorkers.sh
 launchWorkers.sh
+experiments
