@@ -12,7 +12,7 @@ launchWorkers-pyme-default.sh killLaunchWorkers-pyme-default.sh dh5view.sh visgu
 	python gen_script.py -p $(SCRIPTPATH) $@ > $@
 
 launchWorkers-pyme-default.app: launchWorkers-pyme-default.sh
-	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'launchWorkers-pyme-default' -o 'Text Window' -p '/bin/bash' -y 'launchWorkers-pyme-default.sh'
+	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-launcher-default.icns  -a 'launchWorkers-pyme-default' -o 'Text Window' -p '/bin/bash' -y 'launchWorkers-pyme-default.sh'
 
 killLaunchWorkers-pyme-default.app: killLaunchWorkers-pyme-default.sh
 	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'killLaunchWorkers-pyme-default' -o 'Text Window' -p '/bin/bash' -y 'killLaunchWorkers-pyme-default.sh'
@@ -21,13 +21,13 @@ VisGui.app: visgui.sh
 	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-v.icns  -a 'VisGui' -o 'Progress Bar' -p '/opt/local/bin/bash' -X '*|h5r' -y 'visgui.sh'
 
 VisGuiDef.app: visgui-pyme-default.sh
-	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'VisGuiDef' -o 'Progress Bar' -p '/opt/local/bin/bash' -X '*|h5r' -y 'visgui-pyme-default.sh'
+	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-v-default.icns  -a 'VisGuiDef' -o 'Progress Bar' -p '/opt/local/bin/bash' -X '*|h5r' -y 'visgui-pyme-default.sh'
 
 dh5view.app: dh5view.sh
 	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-d.icns  -a 'dh5view' -o 'Progress Bar' -p '/opt/local/bin/bash' -X '*|tif|lsm|h5|psf' -y 'dh5view.sh'
 
 dh5viewDef.app: dh5view-pyme-default.sh
-	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'dh5viewDef' -o 'Progress Bar' -p '/opt/local/bin/bash' -X '*|tif|lsm|h5|psf' -y 'dh5view-pyme-default.sh'
+	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-d-default.icns  -a 'dh5viewDef' -o 'Progress Bar' -p '/opt/local/bin/bash' -X '*|tif|lsm|h5|psf' -y 'dh5view-pyme-default.sh'
 
 PYMEurlOpener.app: PYMEurlOpener.applescript pyme-urlopen.sh editplist_for_url.py
 	/usr/bin/osacompile -o PYMEurlOpener.app PYMEurlOpener.applescript
