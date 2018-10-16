@@ -8,7 +8,7 @@ LOCALICONS=icons
 
 all: VisGui.app	dh5view.app showXML.app VisGuiDef.app launchWorkers.app killLaunchWorkers.app dh5viewDef.app notebookServer.app launchnotebook.app launchWorkers-pyme-default.app killLaunchWorkers-pyme-default.app
 
-launchWorkers-pyme-default.sh killLaunchWorkers-pyme-default.sh dh5view.sh visgui.sh dh5view-pyme-default.sh visgui-pyme-default.sh killLaunchWorkers.sh launchWorkers.sh: gen_script.py
+launchWorkers-pyme-default.sh killLaunchWorkers-pyme-default.sh dh5view.sh visgui.sh dh5view-pyme-default.sh visgui-pyme-default.sh killLaunchWorkers.sh launchWorkers.sh notebookserver.sh notebookserver-pyme-default.sh: gen_script.py
 	python gen_script.py -p $(SCRIPTPATH) $@ > $@
 
 launchWorkers-pyme-default.app: launchWorkers-pyme-default.sh
@@ -48,6 +48,9 @@ killLaunchWorkers.app: killLaunchWorkers.sh
 
 notebookServer.app: notebookserver.sh
 	$(PLATYPUS) -D  -i $(LOCALICONS)/ipython.icns  -a 'notebookServer' -o 'Text Window' -p '/bin/bash' -y 'notebookserver.sh'
+
+notebookServerDef.app: notebookserver-pyme-default.sh
+	$(PLATYPUS) -D  -i $(LOCALICONS)/ipython.icns  -a 'notebookServerDef' -o 'Text Window' -p '/bin/bash' -y 'notebookserver-pyme-default.sh'
 
 launchnotebook.app: launchnotebook.sh
 	$(PLATYPUS) -D  -i $(LOCALICONS)/ipython.icns -R -a 'launchnotebook'  -o 'Text Window'  -p '/bin/bash'  -T 'public.item|public.folder'  'launchnotebook.sh'

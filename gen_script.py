@@ -7,6 +7,16 @@ PATH="{path}"
 (nohup {appname} "$*" >"/tmp/{logprefix}-$BASHPID.tmp" 2>&1 &)
 """
 
+sh_notebook_server = """\
+#!{shebang}
+PATH="{path}"
+{env_line}
+
+cd $HOME
+pwd
+jupyter notebook
+"""
+
 sh_template_simple = """\
 #!{shebang}
 PATH="{path}"
@@ -78,6 +88,11 @@ def simplescript(**kwargs):
         script = sh_template_simple.format(**ndict)
     return script
 
+def notebookserverscript(**kwargs):
+    ndict = replace_or_default(**kwargs)
+    script = sh_notebook_server.format(**ndict)
+    return script
+
 def genscripts():
     scripts = {
         'dh5view.sh' : guiscript(appname='dh5view',logprefix='dh5view'),
@@ -88,6 +103,8 @@ def genscripts():
         'launchWorkers.sh' : simplescript(appname='launchworkers',cleanup_action='launchworkers -k'),
         'killLaunchWorkers-pyme-default.sh' : simplescript(appname='launchworkers -k',env='pyme-default'),
         'launchWorkers-pyme-default.sh' : simplescript(appname='launchworkers',env='pyme-default',cleanup_action='launchworkers -k'),
+        'notebookserver.sh' : notebookserverscript(),
+        'notebookserver-pyme-default.sh' : notebookserverscript(env='pyme-default'),
     }
 
     return scripts
