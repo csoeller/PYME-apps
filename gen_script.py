@@ -1,6 +1,7 @@
 sh_template_guiapp = """\
 #!{shebang}
 PATH="{path}"
+export ETS_TOOLKIT=wx
 {pythonpath_line}
 {env_line}
 

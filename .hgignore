@@ -13,3 +13,5 @@ visgui-pyme-default.sh
 killLaunchWorkers.sh
 launchWorkers.sh
 experiments
+notebookserver.sh
+notebookserver-pyme-default.sh
