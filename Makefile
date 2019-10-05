@@ -6,9 +6,9 @@ PDIR='PYMEapps'
 SCRIPTPATH='$${HOME}/anaconda/bin:$${PATH}'
 LOCALICONS=icons
 
-all: VisGui.app	dh5view.app showXML.app VisGuiDef.app launchWorkers.app killLaunchWorkers.app dh5viewDef.app notebookServer.app launchnotebook.app launchWorkers-pyme-default.app killLaunchWorkers-pyme-default.app
+all: VisGui.app	dh5view.app showXML.app VisGuiDef.app launchWorkers.app killLaunchWorkers.app dh5viewDef.app notebookServer.app launchnotebook.app launchWorkers-pyme-default.app killLaunchWorkers-pyme-default.app VisGuiDefR.app
 
-launchWorkers-pyme-default.sh killLaunchWorkers-pyme-default.sh dh5view.sh visgui.sh dh5view-pyme-default.sh visgui-pyme-default.sh killLaunchWorkers.sh launchWorkers.sh notebookserver.sh notebookserver-pyme-default.sh: gen_script.py
+launchWorkers-pyme-default.sh killLaunchWorkers-pyme-default.sh dh5view.sh visgui.sh dh5view-pyme-default.sh visgui-pyme-default.sh killLaunchWorkers.sh launchWorkers.sh notebookserver.sh notebookserver-pyme-default.sh visgui-pyme-default-recipe.sh: gen_script.py
 	python gen_script.py -p $(SCRIPTPATH) $@ > $@
 
 launchWorkers-pyme-default.app: launchWorkers-pyme-default.sh
@@ -22,6 +22,9 @@ VisGui.app: visgui.sh
 
 VisGuiDef.app: visgui-pyme-default.sh
 	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-v-default.icns  -a 'VisGuiDef' -o 'Progress Bar' -p '/opt/local/bin/bash' -X '*|h5r' -y 'visgui-pyme-default.sh'
+
+VisGuiDefR.app: visgui-pyme-default-recipe.sh
+	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-v-default.icns  -a 'VisGuiDefR' -o 'Progress Bar' -p '/opt/local/bin/bash' -X '*|h5r' -y 'visgui-pyme-default-recipe.sh'
 
 dh5view.app: dh5view.sh
 	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-d.icns  -a 'dh5view' -o 'Progress Bar' -p '/opt/local/bin/bash' -X '*|tif|lsm|h5|psf' -y 'dh5view.sh'

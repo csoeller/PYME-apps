@@ -100,6 +100,7 @@ def genscripts():
         'visgui.sh'  : guiscript(appname='visgui',logprefix='visgui'),
         'dh5view-pyme-default.sh' : guiscript(appname='dh5view',logprefix='dh5view',env='pyme-default'),
         'visgui-pyme-default.sh' : guiscript(appname='visgui',logprefix='visgui',env='pyme-default'),
+        'visgui-pyme-default-recipe.sh' : guiscript(appname='visgui -r ${HOME}/.PYME/defaultrecipe/visgui.yaml',logprefix='visgui',env='pyme-default'),
         'killLaunchWorkers.sh' : simplescript(appname='launchworkers -k'),
         'launchWorkers.sh' : simplescript(appname='launchworkers',cleanup_action='launchworkers -k'),
         'killLaunchWorkers-pyme-default.sh' : simplescript(appname='launchworkers -k',env='pyme-default'),
