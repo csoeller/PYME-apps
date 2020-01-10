@@ -98,15 +98,15 @@ def genscripts():
     scripts = {
         'dh5view.sh' : guiscript(appname='dh5view',logprefix='dh5view'),
         'visgui.sh'  : guiscript(appname='visgui',logprefix='visgui'),
-        'dh5view-pyme-default.sh' : guiscript(appname='dh5view',logprefix='dh5view',env='pyme-default'),
-        'visgui-pyme-default.sh' : guiscript(appname='visgui',logprefix='visgui',env='pyme-default'),
-        'visgui-pyme-default-recipe.sh' : guiscript(appname='visgui -r ${HOME}/.PYME/defaultrecipe/visgui.yaml',logprefix='visgui',env='pyme-default'),
+        'dh5view-pyme-default.sh' : guiscript(appname='dh5view',logprefix='dh5view',env='pyme-default-plain'),
+        'visgui-pyme-default.sh' : guiscript(appname='visgui',logprefix='visgui',env='pyme-default-plain'),
+        'visgui-pyme-default-recipe.sh' : guiscript(appname='visgui -r ${HOME}/.PYME/defaultrecipe/visgui.yaml',logprefix='visgui',env='pyme-default-plain'),
         'killLaunchWorkers.sh' : simplescript(appname='launchworkers -k'),
         'launchWorkers.sh' : simplescript(appname='launchworkers',cleanup_action='launchworkers -k'),
-        'killLaunchWorkers-pyme-default.sh' : simplescript(appname='launchworkers -k',env='pyme-default'),
-        'launchWorkers-pyme-default.sh' : simplescript(appname='launchworkers',env='pyme-default',cleanup_action='launchworkers -k'),
+        'killLaunchWorkers-pyme-default.sh' : simplescript(appname='launchworkers -k',env='pyme-default-plain'),
+        'launchWorkers-pyme-default.sh' : simplescript(appname='launchworkers',env='pyme-default-plain',cleanup_action='launchworkers -k'),
         'notebookserver.sh' : notebookserverscript(),
-        'notebookserver-pyme-default.sh' : notebookserverscript(env='pyme-default'),
+        'notebookserver-pyme-default.sh' : notebookserverscript(env='pyme-default-plain'),
     }
 
     return scripts
