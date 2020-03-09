@@ -59,6 +59,7 @@ default = {'shebang' : '/bin/bash',
            'appname': 'myapp',
            'logprefix' : 'prefix',
            'cleanup_action' : None,
+           'env_init' : 'eval "$(conda shell.bash hook)"',
            }
 
 def replace_or_default(**kwargs):
@@ -70,7 +71,7 @@ def replace_or_default(**kwargs):
     else:
         ndict['pythonpath_line'] = ''
     if ndict['env'] is not None:
-        ndict['env_line'] = "source activate %s" % ndict['env']
+        ndict['env_line'] = ndict['env_init'] + "\n" + ("conda activate %s" % ndict['env'])
     else:
         ndict['env_line'] = ''
         

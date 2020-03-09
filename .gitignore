@@ -1,0 +1,17 @@
+.DS_Store
+*~
+*.app
+*.scpt
+oldnotes
+launchWorkers-pyme-default.sh
+killLaunchWorkers-pyme-default.sh
+dh5view.sh
+visgui.sh
+dh5view-pyme-default.sh
+visgui-pyme-default.sh
+visgui-pyme-default-recipe.sh
+killLaunchWorkers.sh
+launchWorkers.sh
+experiments
+notebookserver.sh
+notebookserver-pyme-default.sh
