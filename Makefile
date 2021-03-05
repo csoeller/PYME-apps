@@ -10,7 +10,7 @@ SYSTEMBASH='/bin/bash'
 
 all: VisGui.app	dh5view.app showXML.app VisGuiDef.app launchWorkers.app killLaunchWorkers.app dh5viewDef.app notebookServer.app launchnotebook.app launchWorkers-pyme-default.app killLaunchWorkers-pyme-default.app VisGuiDefR.app notebookServerDef.app
 
-launchWorkers-pyme-default.sh killLaunchWorkers-pyme-default.sh dh5view.sh visgui.sh dh5view-pyme-default.sh visgui-pyme-default.sh killLaunchWorkers.sh launchWorkers.sh notebookserver.sh notebookserver-pyme-default.sh visgui-pyme-default-recipe.sh: gen_script.py
+launchWorkers-pyme-default.sh killLaunchWorkers-pyme-default.sh dh5view.sh visgui.sh dh5view-pyme-default.sh visgui-pyme-default.sh killLaunchWorkers.sh launchWorkers.sh notebookserver.sh notebookserver-pyme-default.sh visgui-pyme-default-recipe.sh bakeshop-pyme-default.sh: gen_script.py
 	python gen_script.py -p $(SCRIPTPATH) $@ > $@
 
 VisGui.app: visgui.sh
@@ -27,6 +27,9 @@ dh5view.app: dh5view.sh
 
 dh5viewDef.app: dh5view-pyme-default.sh
 	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-d-default.icns  -a 'dh5viewDef' -o 'Progress Bar' -p $(LOCALBASH) -X '*|tif|lsm|h5|psf' -y 'dh5view-pyme-default.sh'
+
+bakeshopDef.app:  bakeshop-pyme-default.sh
+	$(PLATYPUS) -D  -a 'bakeshopDef' -o 'Progress Bar' -p $(LOCALBASH) -y 'bakeshop-pyme-default.sh'
 
 PYMEurlOpener.app: PYMEurlOpener.applescript pyme-urlopen.sh editplist_for_url.py
 	/usr/bin/osacompile -o PYMEurlOpener.app PYMEurlOpener.applescript
@@ -49,7 +52,7 @@ killLaunchWorkers-pyme-default.app: killLaunchWorkers-pyme-default.sh
 	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'killLaunchWorkers-pyme-default' -o 'Text Window' -p $(SYSTEMBASH) -y 'killLaunchWorkers-pyme-default.sh'
 
 
-# utilities for iPython (no jupyter) notebooks
+# utilities for iPython/jupyter notebooks
 
 notebookServer.app: notebookserver.sh
 	$(PLATYPUS) -D  -i $(LOCALICONS)/ipython.icns  -a 'notebookServer' -o 'Text Window' -p $(SYSTEMBASH) -y 'notebookserver.sh'
