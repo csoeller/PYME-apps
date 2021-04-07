@@ -8,7 +8,7 @@ LOCALICONS=icons
 LOCALBASH='/opt/local/bin/bash'
 SYSTEMBASH='/bin/bash'
 
-all: VisGui.app	dh5view.app showXML.app VisGuiDef.app launchWorkers.app killLaunchWorkers.app dh5viewDef.app notebookServer.app launchnotebook.app launchWorkers-pyme-default.app killLaunchWorkers-pyme-default.app VisGuiDefR.app notebookServerDef.app
+all: VisGui.app	dh5view.app showXML.app VisGuiDef.app launchWorkers.app killLaunchWorkers.app dh5viewDef.app notebookServer.app launchnotebook.app launchWorkers-pyme-default.app killLaunchWorkers-pyme-default.app VisGuiDefR.app notebookServerDef.app bakeshopDef.app
 
 launchWorkers-pyme-default.sh killLaunchWorkers-pyme-default.sh dh5view.sh visgui.sh dh5view-pyme-default.sh visgui-pyme-default.sh killLaunchWorkers.sh launchWorkers.sh notebookserver.sh notebookserver-pyme-default.sh visgui-pyme-default-recipe.sh bakeshop-pyme-default.sh: gen_script.py
 	python gen_script.py -p $(SCRIPTPATH) $@ > $@

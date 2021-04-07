@@ -15,3 +15,6 @@ launchWorkers.sh
 experiments
 notebookserver.sh
 notebookserver-pyme-default.sh
+PYMEAcquire.log
+
+bakeshop-pyme-default.sh

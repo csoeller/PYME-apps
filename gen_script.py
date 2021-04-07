@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 sh_template_guiapp = """\
 #!{shebang}
 PATH="{path}"
@@ -64,7 +66,7 @@ default = {'shebang' : '/bin/bash',
 
 def replace_or_default(**kwargs):
     ndict = default.copy()
-    for key, value in kwargs.iteritems():
+    for key, value in kwargs.items():
         ndict[key] = value
     if ndict['pythonpath'] is not None:
         ndict['pythonpath_line'] = "export PYTHONPATH=%s" % ndict['pythonpath']
@@ -154,7 +156,7 @@ def main():
     if args.scriptname not in scripts:
         raise RuntimeError("script '%s' not in list of known scripts" % args.scriptname)
 
-    print scripts[args.scriptname]
+    print(scripts[args.scriptname])
 
 if __name__ == "__main__":
     main()
