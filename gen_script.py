@@ -98,34 +98,34 @@ def notebookserverscript(**kwargs):
     return script
 
 def genscripts():
-    defenv = 'pyme-py37' # default virtualenv
+    defenv = 'pyme38_2' # default virtualenv
     scripts = {
         'dh5view.sh': guiscript(appname='dh5view',
                                 logprefix='dh5view'),
         'visgui.sh': guiscript(appname='visgui',
                                logprefix='visgui'),
-        'dh5view-pyme-default.sh': guiscript(appname='dh5view',
+        'dh5view-pyme-env.sh': guiscript(appname='dh5view',
                                              logprefix='dh5view',
                                              env=defenv),
-        'visgui-pyme-default.sh': guiscript(appname='visgui',
+        'visgui-pyme-env.sh': guiscript(appname='visgui',
                                             logprefix='visgui',
                                             env=defenv),
-        'visgui-pyme-default-recipe.sh': guiscript(appname='visgui -r ${HOME}/.PYME/defaultrecipe/visgui.yaml',
+        'visgui-pyme-env-recipe.sh': guiscript(appname='visgui -r ${HOME}/.PYME/defaultrecipe/visgui.yaml',
                                                    logprefix='visgui',
                                                    env=defenv),
-        'bakeshop-pyme-default.sh': guiscript(appname='bakeshop',
+        'bakeshop-pyme-env.sh': guiscript(appname='bakeshop',
                                             logprefix='bakeshop',
                                             env=defenv),
         'killLaunchWorkers.sh': simplescript(appname='launchworkers -k'),
         'launchWorkers.sh': simplescript(appname='launchworkers',
                                          cleanup_action='launchworkers -k'),
-        'killLaunchWorkers-pyme-default.sh': simplescript(appname='launchworkers -k',
+        'killLaunchWorkers-pyme-env.sh': simplescript(appname='launchworkers -k',
                                                           env=defenv),
-        'launchWorkers-pyme-default.sh': simplescript(appname='launchworkers',
+        'launchWorkers-pyme-env.sh': simplescript(appname='launchworkers',
                                                       env=defenv,
                                                       cleanup_action='launchworkers -k'),
         'notebookserver.sh': notebookserverscript(),
-        'notebookserver-pyme-default.sh': notebookserverscript(env=defenv),
+        'notebookserver-pyme-env.sh': notebookserverscript(env=defenv),
     }
 
     return scripts

@@ -18,3 +18,15 @@ notebookserver-pyme-default.sh
 PYMEAcquire.log
 
 bakeshop-pyme-default.sh
+
+bakeshop-pyme-env.sh
+
+dh5view-pyme-env.sh
+
+killLaunchWorkers-pyme-env.sh
+
+launchWorkers-pyme-env.sh
+
+notebookserver-pyme-env.sh
+
+visgui-pyme-env.sh
