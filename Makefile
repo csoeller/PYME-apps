@@ -46,7 +46,7 @@ notebookServer.app: notebookserver-pyme-env.sh
 	$(PLATYPUS) -D  -i $(LOCALICONS)/ipython.icns  -a 'notebookServer' -o 'Text Window' -p $(SYSTEMBASH) -y 'notebookserver-pyme-env.sh'
 
 launchnotebook.app: launchnotebook.sh
-	$(PLATYPUS) -D  -i $(LOCALICONS)/ipython.icns -R -a 'launchnotebook'  -o 'Text Window'  -p $(SYSTEMBASH)  -T 'public.item|public.folder'  'launchnotebook.sh'
+	$(PLATYPUS) -y -D  -i $(LOCALICONS)/ipython.icns -R -a 'launchnotebook'  -o 'Text Window'  -p $(SYSTEMBASH)  -T 'public.item|public.folder'  'launchnotebook.sh'
 
 install: all
 	if [ -e $(APPDIR)/$(PDIR).old ] ; \

@@ -1,5 +1,5 @@
 #!/opt/local/bin/bash
-PATH="${HOME}/anaconda/bin:${PATH}"
+PATH="${HOME}/miniconda3/bin:${PATH}"
 
 # echo $PATH
 # echo $PYTHONPATH
@@ -14,7 +14,8 @@ filename = "$FNAME"
 root = '/Users/csoe002'
 prefix = 'http://localhost:8888/notebooks/'
 
-fname = filename
+# the next one we need since the OneDrive path into the Library folder seems not to work, need to use the OneDrive symlink??
+fname = filename.replace('/Library/CloudStorage/OneDrive-UniversitaetBern/','/OneDrive - Universitaet Bern/')
 #fname = os.path.abspath(filename)
 if fname.startswith(os.path.abspath(root)+os.sep):
     relp = os.path.relpath(fname,root)
