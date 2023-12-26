@@ -1,0 +1,48 @@
+--- /System/Library/Spotlight/RichText.mdimporter/Contents/Info.plist	2023-12-02 04:55:20.000000000 +0100
++++ /Users/csoe002/Desktop/Info.plist	2023-12-25 11:04:51.000000000 +0100
+@@ -13,14 +13,7 @@
+ 			<string>MDImporter</string>
+ 			<key>LSItemContentTypes</key>
+ 			<array>
+-				<string>public.rtf</string>
+-				<string>public.html</string>
+-				<string>public.xml</string>
+-				<string>public.plain-text</string>
+-				<string>com.apple.traditional-mac-plain-text</string>
+-				<string>com.apple.rtfd</string>
+-				<string>com.apple.webarchive</string>
+-				<string>org.oasis-open.opendocument.text</string>
++				<string>org.jupyter.ipynb</string>
+ 			</array>
+ 		</dict>
+ 	</array>
+@@ -33,7 +26,7 @@
+ 	<key>CFBundleInfoDictionaryVersion</key>
+ 	<string>6.0</string>
+ 	<key>CFBundleName</key>
+-	<string>Rich Text Sniffer</string>
++	<string>Jupyter ipynb Sniffer</string>
+ 	<key>CFBundleShortVersionString</key>
+ 	<string>6.9</string>
+ 	<key>CFBundleSupportedPlatforms</key>
+@@ -45,17 +38,17 @@
+ 	<key>CFPlugInDynamicRegisterFunction</key>
+ 	<string></string>
+ 	<key>CFPlugInDynamicRegistration</key>
+-	<false/>
++	<true/>
+ 	<key>CFPlugInFactories</key>
+ 	<dict>
+-		<key>502B7F32-60DD-11D8-87A4-000393CC3466</key>
++		<key>502B7F32-60DD-11D8-87A4-000393CC3588</key>
+ 		<string>RichTextSnifferPluginFactory</string>
+ 	</dict>
+ 	<key>CFPlugInTypes</key>
+ 	<dict>
+ 		<key>8B08C4BF-415B-11D8-B3F9-0003936726FC</key>
+ 		<array>
+-			<string>502B7F32-60DD-11D8-87A4-000393CC3466</string>
++			<string>502B7F32-60DD-11D8-87A4-000393CC3588</string>
+ 		</array>
+ 	</dict>
+ 	<key>CFPlugInUnloadFunction</key>
