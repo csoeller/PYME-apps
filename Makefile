@@ -1,35 +1,29 @@
+# edit these for local machine
+SCRIPTPATH='$${HOME}/miniconda3/bin:$${PATH}'
+
+# these should generally work
 PLATYPUS='/usr/local/bin/platypus'
 PLATYPUSORI='/usr/local/bin/platypus.orig'
 PLATICNS='/Applications/Platypus.app/Contents/Resources/PlatypusDefault.icns'
 APPDIR='/Applications'
 PDIR='PYMEapps'
-SCRIPTPATH='$${HOME}/anaconda/bin:$${PATH}'
 LOCALICONS=icons
 LOCALBASH='/opt/local/bin/bash'
 SYSTEMBASH='/bin/bash'
 
-all: VisGui.app	dh5view.app showXML.app VisGuiDef.app launchWorkers.app killLaunchWorkers.app dh5viewDef.app notebookServer.app launchnotebook.app launchWorkers-pyme-default.app killLaunchWorkers-pyme-default.app VisGuiDefR.app notebookServerDef.app bakeshopDef.app
+all: VisGui.app	dh5view.app showXML.app launchWorkers.app killLaunchWorkers.app notebookServer.app launchnotebook.app bakeshop.app
 
-launchWorkers-pyme-default.sh killLaunchWorkers-pyme-default.sh dh5view.sh visgui.sh dh5view-pyme-default.sh visgui-pyme-default.sh killLaunchWorkers.sh launchWorkers.sh notebookserver.sh notebookserver-pyme-default.sh visgui-pyme-default-recipe.sh bakeshop-pyme-default.sh: gen_script.py
+launchWorkers-pyme-env.sh killLaunchWorkers-pyme-env.sh dh5view.sh visgui.sh dh5view-pyme-env.sh visgui-pyme-env.sh killLaunchWorkers.sh launchWorkers.sh notebookserver.sh notebookserver-pyme-env.sh visgui-pyme-env-recipe.sh bakeshop-pyme-env.sh: gen_script.py
 	python gen_script.py -p $(SCRIPTPATH) $@ > $@
 
-VisGui.app: visgui.sh
-	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-v.icns  -a 'VisGui' -o 'Progress Bar' -p $(LOCALBASH) -X '*|h5r' -y 'visgui.sh'
+VisGui.app: visgui-pyme-env.sh
+	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-v-default.icns  -a 'VisGui' -o 'Progress Bar' -p $(LOCALBASH) -X '*|h5r' -y 'visgui-pyme-env.sh'
 
-VisGuiDef.app: visgui-pyme-default.sh
-	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-v-default.icns  -a 'VisGuiDef' -o 'Progress Bar' -p $(LOCALBASH) -X '*|h5r' -y 'visgui-pyme-default.sh'
+dh5view.app: dh5view-pyme-env.sh
+	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-d-default.icns  -a 'dh5view' -o 'Progress Bar' -p $(LOCALBASH) -X '*|tif|lsm|h5|psf' -y 'dh5view-pyme-env.sh'
 
-VisGuiDefR.app: visgui-pyme-default-recipe.sh
-	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-v-default.icns  -a 'VisGuiDefR' -o 'Progress Bar' -p $(LOCALBASH) -X '*|h5r' -y 'visgui-pyme-default-recipe.sh'
-
-dh5view.app: dh5view.sh
-	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-d.icns  -a 'dh5view' -o 'Progress Bar' -p $(LOCALBASH) -X '*|tif|lsm|h5|psf' -y 'dh5view.sh'
-
-dh5viewDef.app: dh5view-pyme-default.sh
-	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-d-default.icns  -a 'dh5viewDef' -o 'Progress Bar' -p $(LOCALBASH) -X '*|tif|lsm|h5|psf' -y 'dh5view-pyme-default.sh'
-
-bakeshopDef.app:  bakeshop-pyme-default.sh
-	$(PLATYPUS) -D  -a 'bakeshopDef' -o 'Progress Bar' -p $(LOCALBASH) -y 'bakeshop-pyme-default.sh'
+bakeshop.app:  bakeshop-pyme-env.sh
+	$(PLATYPUS) -D  -a 'bakeshop' -o 'Progress Bar' -p $(LOCALBASH) -y 'bakeshop-pyme-env.sh'
 
 PYMEurlOpener.app: PYMEurlOpener.applescript pyme-urlopen.sh editplist_for_url.py
 	/usr/bin/osacompile -o PYMEurlOpener.app PYMEurlOpener.applescript
@@ -39,29 +33,20 @@ PYMEurlOpener.app: PYMEurlOpener.applescript pyme-urlopen.sh editplist_for_url.p
 showXML.app: showXML.sh
 	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'showXML' -o 'Text Window' -p $(SYSTEMBASH) -X '*|xml'  -y 'showXML.sh'
 
-launchWorkers.app: launchWorkers.sh
-	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-launcher.icns  -a 'launchWorkers' -o 'Text Window' -p $(SYSTEMBASH) -y 'launchWorkers.sh'
+launchWorkers.app: launchWorkers-pyme-env.sh
+	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-launcher-default.icns  -a 'launchWorkers' -o 'Text Window' -p $(SYSTEMBASH) -y 'launchWorkers-pyme-env.sh'
 
-killLaunchWorkers.app: killLaunchWorkers.sh
-	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-launcher.icns  -a 'killLaunchWorkers' -o 'Text Window' -p $(SYSTEMBASH) -y 'killlaunchWorkers.sh'
-
-launchWorkers-pyme-default.app: launchWorkers-pyme-default.sh
-	$(PLATYPUS) -D  -i $(LOCALICONS)/pyme-launcher-default.icns  -a 'launchWorkers-pyme-default' -o 'Text Window' -p $(SYSTEMBASH) -y 'launchWorkers-pyme-default.sh'
-
-killLaunchWorkers-pyme-default.app: killLaunchWorkers-pyme-default.sh
-	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'killLaunchWorkers-pyme-default' -o 'Text Window' -p $(SYSTEMBASH) -y 'killLaunchWorkers-pyme-default.sh'
+killLaunchWorkers.app: killLaunchWorkers-pyme-env.sh
+	$(PLATYPUS) -D  -i $(PLATICNS)  -a 'killLaunchWorkers' -o 'Text Window' -p $(SYSTEMBASH) -y 'killLaunchWorkers-pyme-env.sh'
 
 
 # utilities for iPython/jupyter notebooks
 
-notebookServer.app: notebookserver.sh
-	$(PLATYPUS) -D  -i $(LOCALICONS)/ipython.icns  -a 'notebookServer' -o 'Text Window' -p $(SYSTEMBASH) -y 'notebookserver.sh'
-
-notebookServerDef.app: notebookserver-pyme-default.sh
-	$(PLATYPUS) -D  -i $(LOCALICONS)/ipython.icns  -a 'notebookServerDef' -o 'Text Window' -p $(SYSTEMBASH) -y 'notebookserver-pyme-default.sh'
+notebookServer.app: notebookserver-pyme-env.sh
+	$(PLATYPUS) -D  -i $(LOCALICONS)/ipython.icns  -a 'notebookServer' -o 'Text Window' -p $(SYSTEMBASH) -y 'notebookserver-pyme-env.sh'
 
 launchnotebook.app: launchnotebook.sh
-	$(PLATYPUS) -D  -i $(LOCALICONS)/ipython.icns -R -a 'launchnotebook'  -o 'Text Window'  -p $(SYSTEMBASH)  -T 'public.item|public.folder'  'launchnotebook.sh'
+	$(PLATYPUS) -y -D  -i $(LOCALICONS)/ipython.icns -R -a 'launchnotebook'  -o 'Text Window'  -p $(SYSTEMBASH)  -T 'public.item|public.folder'  'launchnotebook.sh'
 
 install: all
 	if [ -e $(APPDIR)/$(PDIR).old ] ; \
