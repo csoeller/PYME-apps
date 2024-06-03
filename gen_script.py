@@ -98,7 +98,7 @@ def notebookserverscript(**kwargs):
     return script
 
 def genscripts():
-    defenv = 'pyme38_2' # default virtualenv
+    defenv = 'test-pyme-3.10-conda_1' # default virtualenv
     scripts = {
         'dh5view.sh': guiscript(appname='dh5view',
                                 logprefix='dh5view'),
