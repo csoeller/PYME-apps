@@ -30,3 +30,5 @@ launchWorkers-pyme-env.sh
 notebookserver-pyme-env.sh
 
 visgui-pyme-env.sh
+
+checkenv.sh

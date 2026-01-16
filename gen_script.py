@@ -62,7 +62,23 @@ default = {'shebang' : '/bin/bash',
            'logprefix' : 'prefix',
            'cleanup_action' : None,
            'env_init' : 'eval "$(conda shell.bash hook)"',
+           'conda_env_keyword' : 'ViewerCondaEnvironment',
            }
+
+
+ENV_CHECK = '''\
+{env_init}
+
+DEFAULT_ENV='{env}'
+
+CONDA_ENV=`defaults read org.python-microscopy.PymeApps {conda_env_keyword} 2>/dev/null`
+
+if [ -z "$CONDA_ENV" ]; then
+    CONDA_ENV="$DEFAULT_ENV"
+fi
+
+conda activate $CONDA_ENV
+'''
 
 def replace_or_default(**kwargs):
     ndict = default.copy()
@@ -73,7 +89,7 @@ def replace_or_default(**kwargs):
     else:
         ndict['pythonpath_line'] = ''
     if ndict['env'] is not None:
-        ndict['env_line'] = ndict['env_init'] + "\n" + ("conda activate %s" % ndict['env'])
+        ndict['env_line'] = ENV_CHECK.format(**ndict)
     else:
         ndict['env_line'] = ''
         
@@ -124,8 +140,8 @@ def genscripts():
         'launchWorkers-pyme-env.sh': simplescript(appname='launchworkers',
                                                       env=defenv,
                                                       cleanup_action='launchworkers -k'),
-        'notebookserver.sh': notebookserverscript(),
-        'notebookserver-pyme-env.sh': notebookserverscript(env=defenv),
+        'notebookserver.sh': notebookserverscript(conda_env_keyword='NotebookCondaEnvironment'),
+        'notebookserver-pyme-env.sh': notebookserverscript(env=defenv,conda_env_keyword='NotebookCondaEnvironment'),
     }
 
     return scripts
